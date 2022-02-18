@@ -54,20 +54,21 @@ const checkAnswer=(userAns, ans)=>{
 }
 
 const askQuestions=(list)=>{
-  let correctAnsCount=0;
-  for(const question of list){
-    const printQuestion=readLineSync.question(`
-    ${question.question}\n 
-    1 ${question.option1} \n
-    2 ${question.option2} \n
-    3 ${question.option3} \n
-    4 ${question.option4} \n    
+  let resultCount=0;
+  for(const questionObj of list){
+    const userAnswer=readLineSync.question(`
+    ${questionObj.question}\n 
+    1 ${questionObj.option1} \n
+    2 ${questionObj.option2} \n
+    3 ${questionObj.option3} \n
+    4 ${questionObj.option4} \n    
     `)
-    const check=checkAnswer(printQuestion, question.answer)
-    if(check===true){
-      correctAnsCount++;
+    const check=checkAnswer(userAnswer, questionObj.answer)
+    if(check){
+      resultCount++;
     }
   }
-  console.log(`Total correct answers : ${correctAnsCount}/${list.length}`)
+  console.log(`Total correct answers : ${resultCount}/${list.length}`)
 }
+
 askQuestions(questionsList)
