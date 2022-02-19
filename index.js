@@ -3,43 +3,28 @@ const readLineSync = require('readline-sync');
 const questionsList=[
   {
     question:"What is the capital of Australia?",
-    option1:"Melbourne",
-    option2:"Sydney",
-    option3:"Canberra",
-    option4:"Perth",
+    options:['Melbourne','Sydney','Canberra','Perth'],
     answer:3
   },
   {
     question:"What is the capital of Canada?",
-    option1:"Ottawa",
-    option2:"Toronto",
-    option3:"Montreal",
-    option4:"Calgary",
+    options:['Ottawa','Toronto','Montreal','Calgary'],
     answer:1
   },
   {
     question:"What is the capital of Turkey?",
-    option1:"Ankara",
-    option2:"Izmir",
-    option3:"Istanbul",
-    option4:"Konya",
+    options:['Ankara','Izmir','Istanbul','Konya'],
     answer:1
   },
   {
     question:"What is the capital of Afghanistan?",
-    option1:"Afghan",
-    option2:"Islamabad",
-    option3:"Baghdad",
-    option4:"Kabul",
+    options:['Afghan','Islamabad','Baghdad','Kabul'],
     answer:4
   },
   {
     question:"What is the capital of Malaysia?",
-    option1:"Sabah",
-    option2:"Sarawak",
-    option3:"Penang",
-    option4:"Kuala Lumpur",
-    answer:4
+    options:['Penang','Kuala Lumpur'],
+    answer:2
   },
 ]
 
@@ -53,18 +38,20 @@ const checkAnswer=(userAns, ans)=>{
   }
 }
 
+const askOptions=(options)=>{
+  let opt=''
+  options.forEach((option,index)=>{
+     opt=`${opt} ${index+1} ${option} \n`
+  })
+  return opt;
+}
+
 const askQuestions=(list)=>{
   let resultCount=0;
   for(const questionObj of list){
-    const userAnswer=readLineSync.question(`
-    ${questionObj.question}\n 
-    1 ${questionObj.option1} \n
-    2 ${questionObj.option2} \n
-    3 ${questionObj.option3} \n
-    4 ${questionObj.option4} \n    
-    `)
-    const check=checkAnswer(userAnswer, questionObj.answer)
-    if(check){
+    const userAnswer=readLineSync.question(`${questionObj.question}\n${askOptions(questionObj.options)}`)
+    const isAnswerCorrect=checkAnswer(userAnswer, questionObj.answer)
+    if(isAnswerCorrect){
       resultCount++;
     }
   }
