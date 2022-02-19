@@ -30,10 +30,10 @@ const questionsList=[
 
 const checkAnswer=(userAns, ans)=>{
   if(userAns == ans  ){
-    console.log("Correct Answer")
+    console.log("Correct Answer\n")
     return true;
   }else{
-    console.log("Wrong Answer")
+    console.log("Wrong Answer\n")
     return false;
   }
 }
@@ -46,10 +46,13 @@ const askOptions=(options)=>{
   return opt;
 }
 
-const askQuestions=(list)=>{
+const askQuestion=(question)=> `${question}\n`
+
+const startQuiz=(list)=>{
+  console.log("Quiz on Country capital city\n")
   let resultCount=0;
   for(const questionObj of list){
-    const userAnswer=readLineSync.question(`${questionObj.question}\n${askOptions(questionObj.options)}`)
+    const userAnswer=readLineSync.question(`${askQuestion(questionObj.question)}${askOptions(questionObj.options)}`)
     const isAnswerCorrect=checkAnswer(userAnswer, questionObj.answer)
     if(isAnswerCorrect){
       resultCount++;
@@ -58,4 +61,4 @@ const askQuestions=(list)=>{
   console.log(`Total correct answers : ${resultCount}/${list.length}`)
 }
 
-askQuestions(questionsList)
+startQuiz(questionsList)
